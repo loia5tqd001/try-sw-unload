@@ -57,7 +57,8 @@ registerRoute(
 // precache, in this case same-origin .png requests like those from in public/
 registerRoute(
   // Add in any other file extensions or routing criteria as needed.
-  ({ url }) => url.origin === self.location.origin && url.pathname.endsWith('.png'),
+  ({ url }) =>
+    url.origin === self.location.origin && url.pathname.endsWith('.png'),
   // Customize this strategy as needed, e.g., by changing to CacheFirst.
   new StaleWhileRevalidate({
     cacheName: 'images',
@@ -74,6 +75,15 @@ registerRoute(
 self.addEventListener('message', (event) => {
   if (event.data && event.data.type === 'SKIP_WAITING') {
     self.skipWaiting();
+  }
+  if (event.data && event.data.type === 'UNLOAD') {
+    fetch(`https://api.day.app/ViqUHaLVhHW5D244qhAzHK/UNLOAD_FETCH`);
+    fetch(`https://api.day.app/ViqUHaLVhHW5D244qhAzHK/UNLOAD_FETCH_KEEPALIVE`, {
+      keepalive: true,
+    });
+    navigator.sendBeacon(
+      `https://api.day.app/ViqUHaLVhHW5D244qhAzHK/UNLOAD_SENDBEACON_FROM_SW`
+    );
   }
 });
 
