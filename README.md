@@ -8,3 +8,5 @@ Whether or not 4 is feasible? This repo is to test that, whether the service wor
 - Can just use normal `fetch`, don't need `fetch` with `keepalive=true` in Service Worker
 - `navigator.sendBeacon` tho won't work in Service Worker
 - Just like 1,2,3 If the user closes the whole browser (another word, the tab being closed is the last tab), then the request WON'T get sent.
+
+Another caveat: Working with Service Worker is not a pleasant exp at all with React. I have to deal with Service Worker in build mode (`npm run build`) not in dev mode, see more [here](https://github.com/facebook/create-react-app/issues/2396#issuecomment-304539651).
